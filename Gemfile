@@ -30,6 +30,19 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# ******* OUR GEMS ***********
+# ******* OUR GEMS ***********
+gem 'geocoder'
+gem 'stamp'
+
+#**** Styles ******#
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+
+gem 'annotate' #puts schema in our models
+
+
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
