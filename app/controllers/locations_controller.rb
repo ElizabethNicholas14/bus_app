@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  include LocationsHelper
   before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   # GET /locations
@@ -10,7 +11,21 @@ class LocationsController < ApplicationController
   # GET /locations/1
   # GET /locations/1.json
   def show
+    # Marta API address
+    bus_api_url = "http://developer.itsmarta.com/BRDRestService/RestBusRealTimeService/GetAllBus"
+
+    #Get all the buses from the API
+    @buses = get_all_buses_from_api(bus_api_url)
+
+    #Only keep the buses that are close to our user
+    @buses.select! do |bus|
+      is_nearby?(@location.latitude, @location.longitude, bus["LATITUDE"], bus["LONGITUDE"])
+    end
+
+   if @buses.empty?
+      redirect_to edit_location_url(@location), notice: "Sorry, there were no buses nearby."
   end
+
 
   # GET /locations/new
   def new
@@ -71,4 +86,5 @@ class LocationsController < ApplicationController
     def location_params
       params.require(:location).permit(:street_address, :city, :latitude, :longitude)
     end
+end
 end

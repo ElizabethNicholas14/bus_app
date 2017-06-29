@@ -18,7 +18,7 @@
 
   <div class="field form-group">
     <%= form.label :city %>
-    <%= form.text_field :city, id: :location_city, class: 'form-control' %>
+    <%= form.collection_select :city, Location::MARTA_CITIES, :to_s, :to_s, {}, {class: 'form-control'} %>
   </div>
 
   <div class="actions form-group">
